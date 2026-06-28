@@ -39,7 +39,8 @@ def initialize_agents() -> Dict[str, Any]:
             agent_dict[model.name] = AgentClass(
                 base_url=model.base_url,
                 model_name=model.model_name,
-                api_key=model.api_key
+                api_key=model.api_key, 
+                temperature=model.temperature
             )
         except AttributeError:
             logger.warning(f"Warning: Could not find {class_name}Agent in module {model.name}. Skipping this agent.")

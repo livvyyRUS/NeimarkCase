@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
 
-def get_llm(base_url: str, model_name: str, api_key: str):
+def get_llm(base_url: str, model_name: str, api_key: str, temperature: int = 0.05):
     """
     Get a language model instance based on the provided base URL, model name, and API key.
 
@@ -14,7 +14,7 @@ def get_llm(base_url: str, model_name: str, api_key: str):
         base_url=base_url,
         model=model_name,
         api_key=api_key,
-        temperature=0.05,
+        temperature=temperature,
     )
     
     return llm

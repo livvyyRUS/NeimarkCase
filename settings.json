@@ -4,43 +4,50 @@
             "name": "orchestrator",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         },
         {
             "name": "plan",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         },
         {
             "name": "coder",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         },
         {
             "name": "reviewer",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         },
         {
             "name": "tester",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         },
         {
             "name": "tech_writer",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         },
         {
             "name": "builder",
             "base_url": "http://localhost:11434/v1",
             "model_name": "gemma4:latest",
-            "api_key": "ollama"
+            "api_key": "ollama",
+            "temperature": 0.05
         }
     ]
 }

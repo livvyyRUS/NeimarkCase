@@ -11,6 +11,7 @@ class BaseAgent:
         base_url: str, 
         model_name: str, 
         api_key: str,
+        temperature: int,
         tools: list[BaseTool], # Moved mandatory argument up
         agent_type: str # System prompt is optional and placed last
     ):
@@ -28,13 +29,14 @@ class BaseAgent:
         self.api_key = api_key
         self.base_url = base_url
         self.model_name = model_name
+        self.temperature = temperature
         self.agent_type = agent_type
         self.system_prompt = self.get_system_prompt()
         self.tools = tools 
         self.history: list[dict] = [] # Internal history for conversation memory
 
         # Get the LLM instance first (Requires success in get_llm)
-        self.llm = get_llm(self.base_url, self.model_name, self.api_key)
+        self.llm = get_llm(self.base_url, self.model_name, self.api_key, temperature)
 
         # Create the agent using the initialized components
         self.agent = create_agent(
