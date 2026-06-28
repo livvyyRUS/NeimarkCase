@@ -51,3 +51,26 @@ class FileTool:
                 return os.listdir(directory)
         except FileNotFoundError:
             return [f"Error: Directory '{directory}' not found."]
+        
+    @staticmethod
+    @tool
+    def delete_file(file_path: str) -> str:
+        """Deletes a specific file at the given path."""
+        logger.info(f"Tool execute: delete_file | Target file: {file_path}")
+        try:
+            # Проверка на существование объекта
+            if not os.path.exists(file_path):
+                return f"Error: File '{file_path}' not found."
+                
+            # Проверка, что это именно файл, а не папка
+            if os.path.isdir(file_path):
+                return f"Error: '{file_path}' is a directory, not a file."
+                
+            # Удаление файла
+            os.remove(file_path)
+            return f"Success: File '{file_path}' has been deleted."
+            
+        except PermissionError:
+            return f"Error: Permission denied to delete '{file_path}'."
+        except Exception as e:
+            return f"Error: Failed to delete file due to: {str(e)}"
