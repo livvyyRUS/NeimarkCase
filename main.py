@@ -15,9 +15,12 @@ agent = OrchestratorAgent(
     temperature=settings.models[0].temperature,
 )
 
-answer = agent.run_agent("Создай проект калькулятор на python")
-logger.info(answer)
-print(answer)
+query = input("Введите запрос: ")
+
+while query != "exit":
+    answer = agent.run_agent(query)
+    logger.info(answer)
+    query = input("Введите запрос: ")
 
 # from src.tui import EventApp
 
