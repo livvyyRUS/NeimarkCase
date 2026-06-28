@@ -1,3 +1,5 @@
+from src.logger import logger
+
 from src.agents.orchestrator_agent import OrchestratorAgent
 from src.settings import Settings
 
@@ -13,4 +15,5 @@ agent = OrchestratorAgent(
 )
 
 answer = agent.run_agent("В папке output создай проект калькулятор на python")
+logger.info(answer)
 print(answer)
