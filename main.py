@@ -12,5 +12,5 @@ agent = OrchestratorAgent(
     api_key=settings.models[0].api_key
 )
 
-answer = agent.run_agent("В папке output создай проект 'калькулятор' на python")
+answer = agent.run_agent("В папке output создай проект калькулятор на python")
 print(answer)
