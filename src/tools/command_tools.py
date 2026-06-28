@@ -31,7 +31,8 @@ class CommandTool:
                 capture_output=True, 
                 text=True, 
                 check=True, # Raise CalledProcessError on non-zero exit code
-                encoding='utf-8'
+                encoding='utf-8',
+                timeout=30
             )
             # Combine stdout and stderr for a comprehensive result
             return f"Command executed successfully. STDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
@@ -39,5 +40,7 @@ class CommandTool:
         except subprocess.CalledProcessError as e:
             return (f"Execution Failed with Exit Code {e.returncode}.\n"
                     f"STDOUT:\n{e.stdout}\nSTDERR:\n{e.stderr}")
+        except subprocess.TimeoutExpired:
+            return "Execution Failed: Command timed out."
         except Exception as e:
             return f"An unexpected error occurred during command execution: {e}"
