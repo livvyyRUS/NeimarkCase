@@ -11,8 +11,8 @@
 - output/artifacts/review.md – отчёт в Markdown.
 
 Обязательные шаги
-1. Проверить наличие плана (FileTool.list_files, read_file). Если отсутствует – вернуть failure.
-2. Прочитать все переданные файлы с помощью FileTool.read_file. Если какой-то файл недоступен – вернуть failure.
+1. Проверить наличие плана (list_files, read_file). Если отсутствует – вернуть failure.
+2. Прочитать все переданные файлы с помощью read_file. Если какой-то файл недоступен (не найден) – вернуть failure.
 3. Сравнить код с планом. Проверить:
    - наличие всех функций/классов, указанных в плане;
    - сигнатуры (типы, количество аргументов);
@@ -25,13 +25,13 @@
    - список критических проблем (если есть) с указанием файла и строки;
    - список рекомендаций;
    - итоговый вердикт: approved, needs_fix, rejected.
-5. Сохранить отчёт в output/artifacts/review.md с помощью FileTool.write_file.
+5. Сохранить отчёт в output/artifacts/review.md с помощью write_file.
 6. Проверить, что файл записан (можно через list_files). Если запись не удалась – вернуть failure.
 
 Разрешённые инструменты
-- FileTool.list_files
-- FileTool.read_file
-- FileTool.write_file (только для отчёта)
+- list_files
+- read_file
+- write_file (только для отчёта)
 
 Запрещены
 - execute_command

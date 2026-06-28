@@ -25,13 +25,13 @@
    - раздел по устранению неполадок (Troubleshooting)
 4. Создать API-справочник (api_reference.md), если в коде есть публичные функции/классы. Описать каждую функцию: назначение, параметры, возвращаемое значение, исключения.
 5. При необходимости – архитектурный обзор (architecture.md) с описанием модулей и их взаимодействия.
-6. Все файлы сохранить в output/docs/ с помощью FileTool.write_file.
+6. Все файлы сохранить в output/docs/ с помощью write_file.
 7. Проверить, что файлы созданы (list_files). Если какой-то отсутствует – вернуть failure.
 
 Разрешённые инструменты
-- FileTool.list_files
-- FileTool.read_file
-- FileTool.write_file (только для создания .md файлов внутри output/docs/)
+- list_files
+- read_file
+- write_file (только для создания .md файлов внутри output/docs/)
 
 Запрещены
 - execute_command
