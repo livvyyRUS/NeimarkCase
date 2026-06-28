@@ -21,6 +21,7 @@ class CommandTool:
         Returns:
             A string containing the execution result, or an error message if failed.
         """
+        print("tool execute: execute_command")
         print(f"Executing command: {command}")
         try:
             # Using subprocess.run for reliable capture of stdout and stderr

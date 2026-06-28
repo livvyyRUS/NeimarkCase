@@ -12,6 +12,7 @@ class FileTool:
     @tool
     def read_file(path: str) -> str:
         """Reads the entire content of a specified file path."""
+        print("tool execute: read_file")
         try:
             # Use binary mode and decode in case of weird encodings, falling back to utf-8
             with open(path, 'r', encoding='utf-8') as f:
@@ -25,6 +26,7 @@ class FileTool:
     @tool
     def write_file(path: str, content: str) -> str:
         """Writes or overwrites content to a specified file path."""
+        print("tool execute: write_file")
         try:
             # Ensure directory exists before writing (though 'with open' often handles this)
             os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -38,6 +40,7 @@ class FileTool:
     @tool
     def list_files(directory: str, recursive: bool = False) -> List[str]:
         """Lists files and directories within a specified path."""
+        print("tool execute: list_files")
         try:
             if recursive:
                 # Simplified mock for deep search

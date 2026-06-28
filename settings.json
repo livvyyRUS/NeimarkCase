@@ -1,0 +1,46 @@
+{
+    "models": [
+        {
+            "name": "orchestrator",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        },
+        {
+            "name": "plan",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        },
+        {
+            "name": "coder",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        },
+        {
+            "name": "reviewer",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        },
+        {
+            "name": "tester",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        },
+        {
+            "name": "tech_writer",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        },
+        {
+            "name": "builder",
+            "base_url": "http://localhost:11434/v1",
+            "model_name": "gemma4:latest",
+            "api_key": "ollama"
+        }
+    ]
+}

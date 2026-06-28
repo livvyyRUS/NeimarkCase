@@ -1,6 +1,8 @@
 from src.llm import get_llm
 from langchain_core.tools import BaseTool
 from langchain.agents import create_agent
+from pathlib import Path
+import traceback
 
 class BaseAgent:
     def __init__(
@@ -9,7 +11,7 @@ class BaseAgent:
         model_name: str, 
         api_key: str,
         tools: list[BaseTool], # Moved mandatory argument up
-        system_prompt: str | None = None # System prompt is optional and placed last
+        agent_type: str # System prompt is optional and placed last
     ):
         """
         Initialize the BaseAgent with the provided base URL, model name, and API key.
@@ -25,7 +27,8 @@ class BaseAgent:
         self.api_key = api_key
         self.base_url = base_url
         self.model_name = model_name
-        self.system_prompt = system_prompt if system_prompt else None # Store prompt
+        self.agent_type = agent_type
+        self.system_prompt = self.get_system_prompt()
         self.tools = tools 
         self.history: list[dict] = [] # Internal history for conversation memory
 
@@ -37,47 +40,73 @@ class BaseAgent:
             model=self.llm,
             tools=self.tools
         )
-
+        
+    
+    def get_system_prompt(self):
+        file_path = Path(f"prompts/{self.agent_type}.md")
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        file_path.touch(exist_ok=True)
+        
+        with open(f"prompts/{self.agent_type}.md", "r", encoding="utf8") as file:
+            system_prompt = file.read().strip()
+        return system_prompt
+        
 
     def run_agent(self, input: str) -> dict | str:
         """
         Runs the agent with a given input. Automatically manages and updates conversational history.
 
-        The system prompt is applied before running the interaction. The results of this run 
-        will be stored in self.history.
+        The system prompt is applied once (stored in history) and persists across turns.
+        The results of this run (both user input and assistant response) are stored in self.history.
 
         Args:
             input (str): The user's initial query or input.
 
         Returns:
             dict | str: A dictionary containing the agent's final response under the 'output' key, 
-                         or an error string if execution fails.
+                        or an error string if execution fails.
         """
-        messages = []
+        print(f"Вызван агент {self.agent_type}")
         
-        # Add System Prompt if available
-        if self.system_prompt:
-             messages.append({"role": "system", "content": self.system_prompt})
+        # 1. Инициализируем историю, если она пуста, и добавляем system_prompt только один раз
+        if not self.history:
+            if self.system_prompt:
+                self.history.append({"role": "system", "content": self.system_prompt})
 
-        # Append conversation history up to the current turn
+        # 2. Формируем список сообщений для вызова агента
+        messages = []
         for msg in self.history:
-            if isinstance(msg, dict): # Safety check for dict structure
+            if isinstance(msg, dict) and "role" in msg and "content" in msg:
                 messages.append(msg)
 
-        # Add the current user input
+        # 3. Добавляем текущий пользовательский ввод
         user_message = {"role": "user", "content": input}
         messages.append(user_message)
 
         try:
-            # Invoke the agent with all gathered messages (including history, system prompt, and new input)
-            response = self.agent.invoke(messages)
-            output = response.get('output', str(response)) 
-            result_data = {"output": output}
-            self.history.append({"role": "user", "content": input}) # Store user message for next turn's history
-            return result_data
+            # 4. ВЫЗЫВАЕМ АГЕНТА С ПРАВИЛЬНЫМ ФОРМАТОМ ВХОДНЫХ ДАННЫХ
+            # LangGraph ожидает словарь с ключом 'messages'[reference:0]
+            response = self.agent.invoke({"messages": messages})
+            
+            # 5. Извлекаем ответ ассистента из результата
+            # В LangGraph результат содержит ключ 'messages' со списком всех сообщений[reference:1]
+            # Берём последнее сообщение от ассистента
+            if "messages" in response and response["messages"]:
+                last_message = response["messages"][-1]
+                output = last_message.content if hasattr(last_message, "content") else str(last_message)
+            else:
+                output = str(response)
+
+            # 6. Обновляем историю: добавляем и запрос пользователя, и ответ ассистента
+            self.history.append(user_message)
+            self.history.append({"role": "assistant", "content": output})
+
+            return {"output": output}
 
         except Exception as e:
+            a = traceback.format_exception(e)
+            print(a)
+            
             error_msg = f"Agent execution failed: {e}"
             print(f"Agent failed: {error_msg}")
-            # Do not update history on failure
             return {"error": error_msg}
