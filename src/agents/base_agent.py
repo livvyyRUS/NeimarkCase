@@ -1,4 +1,5 @@
 from src.llm import get_llm
+from src.logger import logger
 from langchain_core.tools import BaseTool
 from langchain.agents import create_agent
 from pathlib import Path
@@ -66,7 +67,7 @@ class BaseAgent:
             dict | str: A dictionary containing the agent's final response under the 'output' key, 
                         or an error string if execution fails.
         """
-        print(f"Вызван агент {self.agent_type}")
+        logger.info(f"Вызван агент {self.agent_type}")
         
         # 1. Инициализируем историю, если она пуста, и добавляем system_prompt только один раз
         if not self.history:
@@ -105,8 +106,7 @@ class BaseAgent:
 
         except Exception as e:
             a = traceback.format_exception(e)
-            print(a)
             
             error_msg = f"Agent execution failed: {e}"
-            print(f"Agent failed: {error_msg}")
+            logger.error(f"Agent failed: {error_msg}")
             return {"error": error_msg}

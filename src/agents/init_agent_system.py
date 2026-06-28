@@ -1,3 +1,5 @@
+from src.logger import logger
+
 from src.settings import Settings
 from pydantic.alias_generators import to_pascal
 import importlib
@@ -15,7 +17,7 @@ def initialize_agents() -> Dict[str, Any]:
             
         settings = Settings.model_validate_json(json_settings)
     except FileNotFoundError:
-        print("Error: settings.json not found in the current working directory.")
+        logger.error("Error: settings.json not found in the current working directory.")
         return {}
 
     agent_dict = {}
@@ -40,9 +42,9 @@ def initialize_agents() -> Dict[str, Any]:
                 api_key=model.api_key
             )
         except AttributeError:
-             print(f"Warning: Could not find {class_name}Agent in module {model.name}. Skipping this agent.")
+            logger.warning(f"Warning: Could not find {class_name}Agent in module {model.name}. Skipping this agent.")
         except Exception as e:
-             print(f"Error initializing agent for {model.name}: {e}")
+            logger.error(f"Error initializing agent for {model.name}: {e}")
 
     return agent_dict
 
@@ -54,6 +56,6 @@ def get_agent_dict() -> Dict[str, Any]:
     """
     # Используем атрибут функции для кеширования результата
     if not hasattr(get_agent_dict, "cache"):
-        print("Initializing agent dictionary for the first time...")
+        logger.info("Initializing agent dictionary for the first time...")
         get_agent_dict.cache = initialize_agents()
     return get_agent_dict.cache

@@ -15,7 +15,6 @@
 
 Инструменты
 - Разрешены: FileTool.list_files, FileTool.read_file, CommandTool.execute_command (для запуска тестов).
-- Запрещены: write_file, вызов других агентов.
 
 Выходные данные (обязательный JSON)
 {

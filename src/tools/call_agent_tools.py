@@ -1,6 +1,7 @@
 from typing import List, Tuple
 from langchain_core.tools import tool
 from src.agents import get_agent_dict, BaseAgent
+from src.logger import logger
 
 agent_dict = get_agent_dict()
 
@@ -22,8 +23,7 @@ class CallAgentTools:
         :return: Ответ от вызванного агента.
         :rtype: str
         """
-        print("tool execute: call_agent")
-        print(agent, message)
+        logger.info(f"Tool execute: call_agent | Calling agent: {agent}, Message: {message}")
         agent: BaseAgent = agent_dict.get(agent)
         answer = agent.run_agent(message)
         return answer

@@ -1,5 +1,6 @@
 import subprocess
 from typing import List, Tuple
+from src.logger import logger
 from langchain_core.tools import tool
 
 class CommandTool:
@@ -21,8 +22,7 @@ class CommandTool:
         Returns:
             A string containing the execution result, or an error message if failed.
         """
-        print("tool execute: execute_command")
-        print(f"Executing command: {command}")
+        logger.info(f"Tool execute: execute_command | Executing command: {command}")
         try:
             # Using subprocess.run for reliable capture of stdout and stderr
             result = subprocess.run(
