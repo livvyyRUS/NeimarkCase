@@ -23,6 +23,7 @@ class CallAgentTools:
         :rtype: str
         """
         print("tool execute: call_agent")
+        print(agent, message)
         agent: BaseAgent = agent_dict.get(agent)
         answer = agent.run_agent(message)
         return answer
