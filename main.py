@@ -1,7 +1,10 @@
+import json
 from src.logger import logger
 
 from src.agents.orchestrator_agent import OrchestratorAgent
 from src.settings import Settings
+from pydantic import BaseModel
+
 
 with open("settings.json", "r", encoding="utf8") as file:
     json_settings = file.read().strip()
@@ -20,10 +23,6 @@ query = input("Введите запрос: ")
 while query != "exit":
     answer = agent.run_agent(query)
     logger.info(answer)
-    json.answer()
+    output = answer.get("output")
+    print(f"Ответ агентской системы: {output}")
     query = input("Введите запрос: ")
-
-# from src.tui import EventApp
-
-# app = EventApp()
-# app.run()
