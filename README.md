@@ -68,20 +68,20 @@ python -m venv .venv
 
 Затем активируйте его в зависимости от вашей операционной системы:
 
-Windows (CMD):
-```cmd
-.venv\Scripts\activate.bat
-```
+    Windows (CMD):
+    ```cmd
+    .venv\Scripts\activate.bat
+    ```
 
-Windows (PowerShell):
-```powershell
-.venv\Scripts\Activate.ps1
-```
+    Windows (PowerShell):
+    ```powershell
+    .venv\Scripts\Activate.ps1
+    ```
 
-macOS / Linux (bash, zsh и др.):
-```bash
-source .venv/bin/activate
-```
+    macOS / Linux (bash, zsh и др.):
+    ```bash
+    source .venv/bin/activate
+    ```
 
 
 Установка зависимостей через uv
