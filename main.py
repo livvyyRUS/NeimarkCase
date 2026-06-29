@@ -20,6 +20,7 @@ query = input("Введите запрос: ")
 while query != "exit":
     answer = agent.run_agent(query)
     logger.info(answer)
+    json.answer()
     query = input("Введите запрос: ")
 
 # from src.tui import EventApp

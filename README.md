@@ -52,19 +52,39 @@ cd NeimarkCase
 
 ### Шаг 2: Установка зависимостей
 
-Если используете uv
+## Если используете uv
 
 ```bash
 # Синхронизация проекта
 uv sync
 ```
 
-```bash
+## Если не используете uv
+
 # Создание виртуального окружения (если не существует)
+```bash
 python -m venv .venv
-# Активация
+```
+
+# Затем активируйте его в зависимости от вашей операционной системы:
+Windows (CMD):
+```cmd
+.venv\Scripts\activate.bat
+```
+
+Windows (PowerShell):
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+macOS / Linux (bash, zsh и др.):
+```bash
 source .venv/bin/activate
+```
+
+
 # Установка зависимостей через uv
+```
 pip install -r requirements.txt 
 ```
 
