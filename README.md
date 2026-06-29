@@ -115,6 +115,8 @@ pip install -r requirements.txt
 uv run main.py
 ```
 
+Если не используете uv
+
 ```bash
 python main.py
 ```
