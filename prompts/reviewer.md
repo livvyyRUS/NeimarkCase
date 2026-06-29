@@ -67,3 +67,4 @@
 - Если код полностью соответствует – status: "success", verdict: "approved".
 - Если есть недочёты (исправимые) – status: "needs_fix".
 - Если критические нарушения (включая несоответствие GUI-требованиям) – status: "failure", verdict: "rejected".
+- 
