@@ -1,8 +1,7 @@
 # 🤖 NeimarkCase: Агентная Система для Разработки ПО на Базе AI
 
 [![GitHub Repository](https://img.shields.io/badge/github-livvyyRUS%2FNeimarkCase-blue?style=for-the-badge&logo=github)](https://github.com/livvyyRUS/NeimarkCase)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
-[![Python Version](https://img.shields.io/badge/Requires-Python%3F%3D%32%3E%33.12-green?style=for-the-badge&logo=python)](python>=3.12)
+[![Python Version](https://img.shields.io/badge/Requires-Python%203.12%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/downloads/)
 
 ---
 
