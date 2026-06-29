@@ -6,7 +6,7 @@ from src.logger import logger
 agent_dict = get_agent_dict()
 
 
-class CallAgentTools:
+class CallAgentTool:
     @staticmethod
     @tool
     def call_agent(agent: str, message: str):
